@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog Post</title>
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link href="/scripts/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/Navi.png" sizes="32x32">
+    <style>
+        * {
+            color: black;
+            font-family: Exo;
+        }
+        
+        body {
+            background: #fc7850;
+        }
+        
+        h3,
+        h4 {
+            text-align: center;
+        }
+        
+        .form-group {
+            background: #5eff81;
+            margin: 10px;
+        }
+        
+        form {
+            background: #5eff81;
+            padding: 20px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        
+        #form {
+            margin-top: 15px;
+        }
+        
+        #form2 {
+            margin-left: -0.5px;
+        }
+        
+        input,
+        textarea {
+            border-radius: 5px;
+        }
+        
+        label {
+            float: left;
+            background: #5eff81;
+        }
+        
+        .button {
+            margin-left: 10px;
+            float: right;
+        }
+        
+        .link {
+            float: right;
+            margin-top: 50px;
+            margin-right: 50px;
+            z-index: -1;
+        }
+        
+        #success {
+            position: fixed;
+            float: right;
+            bottom: 50%;
+            left: 75%;
+            font-family: Julius Sans One;
+            font-size: 32px;
+        }
+        
+        .form-text {
+            background: #5eff81;
+        }
+        
+        .navi {
+            float: left;
+            margin-top: 25px;
+            margin-left: 5px;
+        }
+        
+        .showRepForm {
+            margin-right: 250px;
+        }
+        
+        .showComForm {
+            margin-right: 170px;
+        }
+        
+        .modal {
+            opacity: 0.5;
+        }
+        
+        .modal-content {
+            background: #84ff9b;
+        }
+        
+        .clearButton {
+            background: #ff6b6b;
+        }
+        
+        .modal-footer {
+            border: none;
+        }
+        
+        .modal-header {
+            border: none;
+        }
+        
+        .tooltip-inner {
+            background-color: #5eff81;
+        }
+    </style>
+</head>
+
+<body>
+    <img data-toggle="tooltip" title="Click Me" class="link" src="http://www.columbiajazzhouse.com/Link%20Flute.png">
+    <img data-toggle="tooltip" title="Hey, listen!" class="navi" src="http://orig03.deviantart.net/cef6/f/2011/158/9/5/navy_design_by_xerodead-d3i9i9z.png"
+        style="width:10%;height:10%">
+    <div class="container ">
+        <form id="form" class="col-xs-6">
+            <div style="display: none">
+                <label id="authorId"></label>
+                <input type="text" class="form-control" id="authorId" name="authorId" value="1931" />
+            </div>
+            <h3>Create A New Blog Post</h3>
+            <div class="form-group row">
+                <label id="blogTitle">Blog Title:</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title of Your Blog" />
+            </div>
+            <div class="form-group row">
+                <label id="blogContent">Blog Content:</label>
+                <textarea class="form-control" id="content" name="content" rows="4" placeholder="Enter Your Blog Post Here"></textarea>
+            </div>
+            <div>
+                <button class="btn btnSub button" id="submitButton">Submit</button>
+                <button class="btn clearButton button">Clear</button>
+            </div>
+        </form>
+        <button class="btn showComForm button" type="button">Post A Reply</button>
+        <form id="form2" class="form commentForm col-xs-3" style="display: none">
+            <h4>Create A New Comment</h4>
+            <div class="form-group row user">
+                <label id="blogUserName">User Name:</label>
+                <input type="text" class="form-control" id="userName" name="userName" placeholder="Name" />
+            </div>
+            <div class="form-group row titleDiv">
+                <label id="blogTitle3" for="input-error">Comment Title:</label>
+                <input type="text" class="form-control title" id="input-error" name="title" placeholder="Title of Your Comment" />
+            </div>
+            <div class="form-group row contentDiv">
+                <label id="blogContent">Comment Content:</label>
+                <textarea class="form-control content" name="content" rows="4" placeholder="Enter Your Comment Here"></textarea>
+            </div>
+            <div>
+                <button class="btn btnSubComment button" type="submit" id="submitButton2">Submit</button>
+                <button class="btn clearButton button" type="button">Clear</button>
+            </div>
+        </form>
+        <button class="btn showRepForm button" type="button">Post A Comment</button>
+        <form id="form3" class="form commentForm col-xs-3" style="display:none">
+            <h4>Create A New Reply</h4>
+            <div class="form-group row">
+                <label id="blogUserName">User Name:</label>
+                <input type="text" class="form-control user" name="userName" placeholder="Name" />
+            </div>
+            <div class="form-group row">
+                <label id="blogTitle">Reply Title:</label>
+                <input type="text" class="form-control title" name="title" placeholder="Title of Your Reply" />
+            </div>
+            <div class="form-group row">
+                <label id="blogContent">Reply Content:</label>
+                <textarea class="form-control content" name="content" rows="4" placeholder="Enter Your Reply Here"></textarea>
+            </div>
+            <div>
+                <button class="btn btnSubComment button" id="submitButton3">Submit</button>
+                <button class="btn clearButton button">Clear</button>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/jquery.validate.js"></script>
+    <!-- Custom Scripts -->
+    <!--<script type="text/javascript" src="/js/custom.js"></script>-->
+    <script type="text/javascript" src="/scripts/blogs.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/additional-methods.js"></script>
+    <script type="text/javascript">
+        blogPost = {}
+        comment = {}
+        var form = $("#form");
+        var form2 = $("#form2");
+        var form3 = $("#form3");
+
+        $(document).ready();
+
+        startUp = function () {
+            $(".btnSub").on("click", validatePost);
+            $(".btnSubComment").on("click", validateComment);
+            $(".showRepForm").on("click", showCommentForm);
+            $(".showComForm").on("click", showReplyForm);
+            $(".clearButton").on("click", clearForm);
+            $(".link").on("click", modal);
+            $(".zelda").on("click", zeldasLullaby);
+            $(".sun").on("click", sunSong);
+            $(".time").on("click", songOfTime);
+            $(".close").on("click", resetModal);
+
+            form.validate({
+                rules: {
+                    title: {
+                        required: true,
+                        minlength: 5
+                    },
+                    content: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 500
+                    }
+
+                }
+
+            });
+
+            form2.validate({
+                rules: {
+                    userName: {
+                        required: true,
+                        lettersonly: true,
+                        minlength: 4
+                    },
+                    title: {
+                        required: true,
+                        minlength: 5
+                    },
+                    content: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 500
+                    }
+
+                }
+
+            });
+
+            form3.validate({
+                rules: {
+                    userName: {
+                        required: true,
+                        lettersonly: true,
+                        minlength: 4
+                    },
+                    title: {
+                        required: true,
+                        minlength: 5
+                    },
+                    content: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 500
+                    }
+
+                }
+
+            });
+        }
+
+        validatePost = function () {
+            event.preventDefault();
+            if (form.valid() == true && blogPost.id == null) {
+                var formVals = $("#form").serialize();
+                callAjaxPost(formVals);
+            } else if (form.valid() == true && blogPost.id) {
+                var formVals = $("#form").serialize();
+                callAjaxPut(formVals);
+            } else {
+                onError();
+            }
+        }
+
+        validateComment = function () {
+            event.preventDefault();
+            var formValid = form2.valid();
+            if (formValid && comment.id == null) {
+                var myData = $("#form2").serialize();
+                submitComment(myData);
+
+            } else if (form3.valid() == true && comment.id !== null) {
+                var myData = $("#form3").serialize();
+                submitReply(myData);
+            } else {
+                onError();
+            }
+        }
+
+        callAjaxPost = function (myData) {
+            event.preventDefault();
+            insert(myData, onSuccess, onError);
+        }
+
+        onSuccess = function (myDataString) {
+            JSON.stringify(myDataString);
+            blogPost.id = myDataString;
+            $("#submitButton").html("Update");
+            console.log("Success!");
+            $(".successModal").modal("show");
+        }
+
+        callAjaxPut = function (commentUpdate) {
+            event.preventDefault();
+            var id = blogPost.id.item;
+            var commentUpdateString = commentUpdate + "&id=" + id;
+            update(blogPost.id.item, commentUpdateString, onSuccessUpdate,
+                onError);
+        }
+
+        onSuccessUpdate = function () {
+            console.log("Success!")
+            $(".successModal").modal("show");
+        }
+
+        onError = function () {
+            console.log("Error!");
+            $(".errorModal").modal("show");
+        }
+
+        showCommentForm = function () {
+            $("#form2").removeAttr("style");
+            $(".showRepForm").hide();
+        }
+
+        submitComment = function (myData) {
+            event.preventDefault();
+            var id = blogPost.id.item;
+            var commentPostString = myData + "&blogPostId=" + id;
+            commentPost(commentPostString, onCommentSuccess, onError);
+        }
+
+        onCommentSuccess = function (myCommentString) {
+            comment.id = myCommentString.item;
+            console.log("Success!")
+            $(".commentModal").modal("show");
+        }
+
+        showReplyForm = function () {
+            $("#form3").removeAttr("style");
+            $(".showComForm").hide();
+        }
+
+        submitReply = function (myData) {
+            event.preventDefault();
+            var id = blogPost.id.item;
+            var parentId = comment.id;
+            var replyPostString = myData + "&blogPostId=" + id + "&parentCommentId=" + parentId;
+            commentPost(replyPostString, onReplySuccess, onError);
+            commentsByBlog(id, onGetSuccess, onError);
+        }
+
+        onReplySuccess = function () {
+            comment.id = null;
+        }
+
+        onGetSuccess = function (blogData) {
+            JSON.stringify(blogData);
+            console.log(blogData);
+        }
+
+        clearForm = function () {
+            event.preventDefault();
+            var selectedForm = this;
+            clearNearest(selectedForm);
+        }
+
+        clearNearest = function (selectedForm) {
+            var myForm = $(selectedForm).closest("form");
+            $(myForm)[0].reset();
+        }
+
+        modal = function () {
+            $(".songModal").modal("show");
+        }
+
+        zeldasLullaby = function () {
+            $(".lullabyimg").removeAttr("style");
+            $(".dropdown-toggle").hide();
+        }
+
+        sunSong = function () {
+            $(".sunimg").removeAttr("style");
+            $(".dropdown-toggle").hide();
+        }
+
+        songOfTime = function () {
+            $(".timeimg").removeAttr("style");
+            $(".dropdown-toggle").hide();
+        }
+
+        resetModal = function () {
+            $(".songs").hide();
+            $(".dropdown-toggle").show();
+        }
+
+        $(document).ready(startUp);
+    </script>
+    <div class="modal fade songModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Play Along With Link!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">
+                            Choose a Song<span class="caret"></span>
+                            </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a class="dropdown-item zelda">Zelda's Lullaby</a></li>
+                            <li><a class="dropdown-item sun">Song of Storms</a></li>
+                            <li><a class="dropdown-item time">Legend of Zelda Theme Song</a></li>
+                        </ul>
+                    </div>
+                    <img class="lullabyimg songs" style="display: none" src="https://s3.amazonaws.com/static.musescore.com/1842481/8ad9493662/score_0.png">
+                    <img class="sunimg songs" style="display: none" src="https://s3.amazonaws.com/static.musescore.com/1545401/3050f8c3eb/score_0.png">
+                    <img class="timeimg songs" style="display: none" src="https://s3.amazonaws.com/static.musescore.com/206346/e78c263f71/score_0.png">
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade successModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+                    <p>Your Blog Has Been Successfully Submitted!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade commentModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+                    <p>Your Comment Has Been Successfully Submitted!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade errorModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+                    <p>An Error Has Occured!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
