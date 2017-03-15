@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Blog</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            background: rgb(127, 255, 197);
+            font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+        }
+        
+        #blog {
+            margin-top: 100px;
+        }
+        
+        #titleEmail {
+            margin-top: 150px;
+        }
+        
+        #form,
+        #contentPost {
+            font-size: 20px;
+        }
+        
+        #title,
+        #email,
+        #content {
+            color: white;
+            font-size: 20px;
+        }
+        
+        input,
+        .form-control {
+            background-color: rgb(84, 94, 90);
+            border-radius: 5px;
+        }
+        
+        #titleEnter,
+        #emailEnter,
+        #contentPost {
+            padding: 20px;
+        }
+        
+        #title,
+        #email {
+            float: right;
+        }
+        
+        #blogText,
+        #backButton {
+            padding: 20px;
+        }
+        
+        button {
+            border-radius: 5px;
+            background-color: white;
+        }
+        
+        a {
+            font-size: 20px;
+            text-decoration: none;
+        }
+        
+        #contentPost,
+        #blogTitle,
+        h2 {
+            text-align: center;
+        }
+        
+        #back,
+        #submit {
+            float: right;
+            margin-right: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="blogForm">
+        <form id="form">
+            <div id="titleEmail" class="col-xs-6">
+                <div id="titleEnter">
+                    <label>Blog Title:</label>
+                    <input type="text" id="title" class="col-xs-8" placeholder="Enter Your Blog's Title" />
+                </div>
+                <div id="emailEnter">
+                    <label>Blog Email:</label>
+                    <input type="text" id="email" class="col-xs-8" placeholder="Email" />
+                </div>
+            </div>
+            <div id="blog" class="col-xs-6" "content1">
+                <label>Blog Content:</label>
+                <div id="blogText">
+                    <textarea class="form-control" id="content" rows="10" placeholder="Enter Your Blog Post Here"></textarea>
+                </div>
+            </div>
+        </form>
+        <button type="button" id="submit">Submit Blog</button>
+    </div>
+    <div id="blogContent">
+        <h1 id="blogTitle"></h1>
+        <h2>Email:
+            <a id="emailLink"></a>
+        </h2>
+        <p id="contentPost"></p>
+        <div id="backButton">
+            <button type="button" id="back">Back</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function startUp() {
+
+            $("#submit").on("click", submitForm);
+            $("#back").on("click", backToForm);
+        }
+
+        $("#blogContent").hide();
+
+        function submitForm() {
+            var titleVal = $("#title").val();
+            $("#blogTitle").text(titleVal);
+            var emailVal = $("#email").val();
+            $("a").text(emailVal);
+            var contentVal = $("#content").val();
+            $("p").text(contentVal);
+            var formVal = $("#form").val();
+            $("#blogForm").hide(formVal);
+            var bContent = $("#blogContent").val();
+            $("#blogContent").show(bContent);
+        }
+
+        function backToForm() {
+            var formVal = $("#form").val();
+            $("#blogForm").show(formVal);
+            var contentV = $("#content").val();
+            $("#blogContent").hide(contentV);
+        }
+
+        $(document).ready(startUp);
+    </script>
+</body>
+
+</html>
